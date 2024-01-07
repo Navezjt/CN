@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Dependencies
         run: npm install
       - name: Remove Duplicates
         run: node scripts/remove-duplicates.js
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: channels
           path: channels/
@@ -23,15 +23,15 @@ jobs:
     needs: remove-duplicates
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Download Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
       - name: Install Dependencies
         run: npm install
       - name: Filter Playlists
         run: node scripts/filter.js
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: channels
           path: channels/
@@ -40,15 +40,15 @@ jobs:
     needs: filter
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Download Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
       - name: Install Dependencies
         run: npm install
       - name: Format Playlists
         run: node scripts/format.js
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: channels
           path: channels/
@@ -57,9 +57,9 @@ jobs:
     needs: format
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Download Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
       - name: Install Dependencies
         run: npm install
       - name: Generate Playlists
@@ -74,15 +74,15 @@ jobs:
     needs: generate
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Download Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
       - name: Install Dependencies
         run: npm install
       - name: Update README.md
         run: node scripts/update-readme.js
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: README.md
           path: README.md
@@ -91,14 +91,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Download /channels
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: channels
           path: channels/
       - name: Download README.md
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: README.md
       - name: Generate Token
@@ -136,6 +136,4 @@ jobs:
       - name: Approve Pull Request
         if: steps.pr.outputs.pull-request-operation == 'created'
         uses: juliangruber/approve-pull-request-action@v1
-        with:
-          github-token: ${{ secrets.PAT }}
-          number: ${{ steps.pr.outputs.pull-request-number }}
+       
