@@ -136,4 +136,6 @@ jobs:
       - name: Approve Pull Request
         if: steps.pr.outputs.pull-request-operation == 'created'
         uses: juliangruber/approve-pull-request-action@v1
-       
+        with:
+          github-token: ${{ secrets.PAT }}
+          number: ${{ steps.pr.outputs.pull-request-number }}
