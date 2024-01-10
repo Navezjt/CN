@@ -105,7 +105,7 @@ jobs:
         uses: tibdex/github-app-token@v1
         id: generate-token
         with:
-          app_id: ${{ 676597 }}
+          app_id: ${{676597}}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Create Pull Request
         id: pr
